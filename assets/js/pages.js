@@ -6,6 +6,7 @@
   const ACTIVE = { competitions: 'competitions', actualites: 'actualites', article: 'actualites', ligue: 'ligue', commissions: 'commissions', formations: 'formations', jouer: 'jouer', golfs: 'golfs', galerie: 'ligue', contact: '' };
   boot(ACTIVE[page] ?? '');
 
+  const HERO_IMG = {"competitions": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/trophee-benoit-cice-1/9b32c231cc4a6_3.webp", "actualites": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/finale-des-circuits-interdepartementaux/b3bcced89cca6_img-9240.webp", "ligue": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/assemblee-generale-14-mars-2026/097f90b2e7b96_whatsapp-image-2026-03-16-at-11-46-21.webp", "commissions": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/stage-de-cohesion-u12-26-et-27-septembre/f7b6bf87be9a6_img-9006.webp", "formations": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/coupe-du-centre-jeunes/f9a2e25decd96_whatsapp-image-2026-04-13-at-15-00-12.webp", "jouer": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/golf-tour-parc-de-loire-29-septembre/50c052c26eba6_1.webp", "galerie": "https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/gallery/finale-des-circuits-interdepartementaux/8526abe89cca6_img-9250.webp"};
   const SECTION_META = {
     ligue: { title: 'La Ligue', href: 'ligue.html' },
     sportif: { title: 'Compétitions', href: 'competitions.html' },
@@ -26,7 +27,7 @@
   }
   const initials = (n) => n.split(/[\s-]+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
   const person = (p) => `<div class="person">
-      <div class="ph">${p.photo_url ? `<img src="${esc(p.photo_url)}" alt="" loading="lazy">` : `<span class="ini">${esc(initials(p.name))}</span>`}</div>
+      <div class="ph${p.photo_url ? '' : ' noimg'}">${p.photo_url ? `<img src="${esc(p.photo_url)}" alt="" loading="lazy">` : `<span class="ini">${esc(initials(p.name))}</span>`}</div>
       <h3>${esc(p.name)}</h3>${p.role ? `<p class="role">${esc(p.role)}</p>` : ''}
       ${p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}${p.phone ? `<a href="tel:${esc(p.phone.replace(/\s/g, ''))}">${esc(p.phone)}</a>` : ''}
     </div>`;
@@ -34,7 +35,7 @@
   const run = {
     // ---------------- Compétitions ----------------
     async competitions() {
-      pageHero({ title: 'Calendrier des compétitions', subtitle: 'Toutes les épreuves de la saison 2026, de la Ligue Jeunes au golf entreprise.', crumbs: [{ label: 'Compétitions' }] });
+      pageHero({ image: HERO_IMG.competitions, title: 'Calendrier des compétitions', subtitle: 'Toutes les épreuves de la saison 2026, de la Ligue Jeunes au golf entreprise.', crumbs: [{ label: 'Compétitions' }] });
       const { data } = await sb.from('golfcentre_events').select('*').eq('published', true).order('start_date');
       const events = data || [];
       const cats = [...new Set(events.map((e) => e.category))].sort((a, b) => a.localeCompare(b, 'fr'));
@@ -74,7 +75,7 @@
 
     // ---------------- Actualités ----------------
     async actualites() {
-      pageHero({ title: 'Actualités', subtitle: 'Résultats, sélections, vie des clubs et newsletters de la Ligue.', crumbs: [{ label: 'Actualités' }] });
+      pageHero({ image: HERO_IMG.actualites, title: 'Actualités', subtitle: 'Résultats, sélections, vie des clubs et newsletters de la Ligue.', crumbs: [{ label: 'Actualités' }] });
       const cats = ['Toutes', 'Compétition', 'Vie de la Ligue', 'Newsletter'];
       const catEl = document.getElementById('news-cats');
       const state = { cat: '', page: 0 };
@@ -142,7 +143,7 @@
 
     // ---------------- La Ligue ----------------
     async ligue() {
-      pageHero({ title: 'La Ligue', subtitle: 'Une ligue sportive où l\'on se sent bien : des champions, des bénévoles, des clubs et des curieux.', crumbs: [{ label: 'La Ligue' }] });
+      pageHero({ image: HERO_IMG.ligue, title: 'La Ligue', subtitle: 'Une ligue sportive où l\'on se sent bien : des champions, des bénévoles, des clubs et des curieux.', crumbs: [{ label: 'La Ligue' }] });
       const [intro, people, golfs, ev] = await Promise.all([
         sb.from('golfcentre_pages').select('body').eq('slug', 'la-ligue').maybeSingle(),
         sb.from('golfcentre_people').select('*').order('sort'),
@@ -163,15 +164,15 @@
     },
 
     async commissions() {
-      pageHero({ title: 'Commissions', subtitle: 'Jeunes, scolaire, santé, environnement, femmes, paragolf : les chantiers qui font grandir le golf dans la région.', crumbs: [{ label: 'Commissions' }] });
+      pageHero({ image: HERO_IMG.commissions, title: 'Commissions', subtitle: 'Jeunes, scolaire, santé, environnement, femmes, paragolf : les chantiers qui font grandir le golf dans la région.', crumbs: [{ label: 'Commissions' }] });
       await sectionTiles('commissions', 'sec-commissions');
     },
     async formations() {
-      pageHero({ title: 'Formations & arbitrage', subtitle: 'Arbitres, organisateurs, animateurs bénévoles : se former pour faire vivre les compétitions.', crumbs: [{ label: 'Formations' }] });
+      pageHero({ image: HERO_IMG.formations, title: 'Formations & arbitrage', subtitle: 'Arbitres, organisateurs, animateurs bénévoles : se former pour faire vivre les compétitions.', crumbs: [{ label: 'Formations' }] });
       await sectionTiles('formations', 'sec-formations');
     },
     async jouer() {
-      pageHero({ title: 'Jouer près de chez vous', subtitle: 'Golf Pour Tous, Golf Tour, golf entreprise : trois portes d\'entrée pour pratiquer à votre rythme.', crumbs: [{ label: 'Jouer' }] });
+      pageHero({ image: HERO_IMG.jouer, title: 'Jouer près de chez vous', subtitle: 'Golf Pour Tous, Golf Tour, golf entreprise : trois portes d\'entrée pour pratiquer à votre rythme.', crumbs: [{ label: 'Jouer' }] });
       await Promise.all([sectionTiles('golf-pour-tous', 'sec-golf-pour-tous'), sectionTiles('golf-tour', 'sec-golf-tour'), sectionTiles('golf-entreprise', 'sec-golf-entreprise')]);
       if (location.hash) setTimeout(() => document.querySelector(location.hash)?.scrollIntoView(), 300);
     },
@@ -179,7 +180,8 @@
     // ---------------- Annuaire des golfs ----------------
     async golfs() {
       const { data } = await sb.from('golfcentre_golfs').select('*').order('name');
-      const golfs = (data || []).filter((g) => g.lat && g.lng);
+      const RANK = { Golf: 0, Compact: 1, 'P & P': 2, Practice: 3, Entreprise: 4 };
+      const golfs = (data || []).filter((g) => g.lat && g.lng).sort((a, b) => (RANK[a.category] ?? 5) - (RANK[b.category] ?? 5) || a.name.localeCompare(b.name, 'fr'));
       const map = baseMap('golfs-map', { scrollWheelZoom: true });
       const markers = new Map();
       const state = { q: '', dept: '', cat: '' };
@@ -227,7 +229,7 @@
 
     // ---------------- Photothèque ----------------
     async galerie() {
-      pageHero({ title: 'Photothèque', subtitle: 'Compétitions, stages, Golf Tour, vie de la Ligue : la saison en images.', crumbs: [{ label: 'La Ligue', href: 'ligue.html' }, { label: 'Photothèque' }] });
+      pageHero({ image: HERO_IMG.galerie, title: 'Photothèque', subtitle: 'Compétitions, stages, Golf Tour, vie de la Ligue : la saison en images.', crumbs: [{ label: 'La Ligue', href: 'ligue.html' }, { label: 'Photothèque' }] });
       const { data } = await sb.from('golfcentre_gallery').select('*').order('sort');
       const albums = []; const byName = new Map();
       (data || []).forEach((r) => { if (!byName.has(r.album)) { const a = { name: r.album, cat: r.caption || 'Albums', photos: [] }; byName.set(r.album, a); albums.push(a); } byName.get(r.album).photos.push(r); });
