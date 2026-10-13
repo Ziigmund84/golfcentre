@@ -36,5 +36,5 @@ select id from auth.users where email = 'adresse@exemple.fr';
 - Stockage : bucket public `golfcentre-media`
 
 ## Développement
-Les pages intérieures sont générées par `python3 tools/build.py` à partir d'un gabarit commun ; `index.html` et `admin/` sont écrits à la main.
+Les pages intérieures sont générées par `python3 tools/build.py` (puis `python3 tools/stamp.py` pour versionner CSS/JS) à partir d'un gabarit commun ; `index.html` et `admin/` sont écrits à la main.
 Bibliothèques chargées depuis CDN : supabase-js, GSAP + ScrollTrigger, Lenis, Leaflet (fonds CARTO / OpenStreetMap).
