@@ -33,7 +33,7 @@
   const posts = newsRes.data || [];
   const featured = posts.filter((p) => p.featured);
   const list = (featured.length >= 3 ? featured : posts).slice(0, 3);
-  document.getElementById('home-news').innerHTML = list.map((p, i) => newsCard(p, i === 0)).join('') || '<p class="empty">Aucune actualité publiée pour le moment.</p>';
+  document.getElementById('home-news').innerHTML = list.map((p) => newsCard(p)).join('') || '<p class="empty">Aucune actualité publiée pour le moment.</p>';
 
   // ---- Chemins ----
   const paths = h.paths || [];
@@ -75,6 +75,9 @@
     const ball = document.getElementById('hero-ball');
     const flag = document.getElementById('hero-flag');
     const carry = document.getElementById('ro-carry'), apex = document.getElementById('ro-apex'), speed = document.getElementById('ro-speed');
+    const svg = trail.ownerSVGElement;
+    const fit = () => svg.setAttribute('preserveAspectRatio', innerWidth / innerHeight < 1.15 ? 'xMidYMax meet' : 'xMidYMax slice');
+    fit(); addEventListener('resize', fit);
     const L0 = trail.getTotalLength();
     const setFrame = (p) => {
       trail.style.strokeDashoffset = L0 * (1 - p);

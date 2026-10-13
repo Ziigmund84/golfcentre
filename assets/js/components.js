@@ -68,10 +68,10 @@
     </a>`;
   }
 
-  const TILES = { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>' };
+  const TILES = { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">contributeurs OpenStreetMap</a>' };
   function baseMap(el, opts = {}) {
     const map = L.map(el, Object.assign({ scrollWheelZoom: false, zoomControl: true }, opts)).setView([47.45, 1.6], 7);
-    L.tileLayer(opts.dark ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', Object.assign({ maxZoom: 18, subdomains: 'abcd' }, TILES)).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: TILES.attribution }).addTo(map);
     return map;
   }
   function pinIcon(g, active) {

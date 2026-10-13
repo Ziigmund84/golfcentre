@@ -87,7 +87,7 @@
         if (state.cat) q = q.eq('category', state.cat);
         const { data } = await q;
         const items = (data || []).slice(0, PER);
-        list.insertAdjacentHTML('beforeend', items.map((p, i) => newsCard(p, reset && i === 0 && !state.cat)).join('') || (reset ? '<p class="empty">Aucune actualité dans cette catégorie.</p>' : ''));
+        list.insertAdjacentHTML('beforeend', items.map((p) => newsCard(p)).join('') || (reset ? '<p class="empty">Aucune actualité dans cette catégorie.</p>' : ''));
         more.hidden = (data || []).length <= PER;
         refresh();
       };
