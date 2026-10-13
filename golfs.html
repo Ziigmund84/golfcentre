@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les golfs — Ligue Centre-Val de Loire de Golf</title>
+<meta name="description" content="Annuaire et carte des golfs, practices et associations sportives de la Ligue Centre-Val de Loire.">
+<meta name="theme-color" content="#003362">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="golfs" class="solid-header">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+<main id="main">
+<h1 class="sr-only">Annuaire des golfs</h1>
+<div class="golfs-layout" style="margin-top:var(--header-h)">
+  <div class="golfs-side">
+    <h2 style="font-size:2.2rem;margin-bottom:6px">Annuaire des golfs</h2>
+    <p style="color:var(--muted);margin-bottom:18px"><span id="g-count">…</span> structures affiliées. Touchez un golf pour le voir sur la carte.</p>
+    <div class="field" style="margin-bottom:12px"><label for="g-q">Rechercher</label><input type="search" id="g-q" placeholder="Nom, ville…"></div>
+    <div class="field" style="margin-bottom:12px"><label for="g-dept">Département</label><select id="g-dept"><option value="">Tous les départements</option></select></div>
+    <div class="chips" id="g-cat" role="group" aria-label="Type de structure" style="margin-bottom:18px"></div>
+    <div id="g-list"></div>
+  </div>
+  <div id="golfs-map" aria-label="Carte des golfs"></div>
+</div>
+</main>
+<footer id="site-footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

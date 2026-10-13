@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Ligue Centre-Val de Loire de Golf</title>
+<meta name="description" content="Contacter la Ligue Centre-Val de Loire de Golf.">
+<meta name="theme-color" content="#003362">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="contact">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+<main id="main">
+<section id="page-hero"></section>
+<section class="section" style="padding-top:56px"><div class="wrap contact-grid">
+  <div class="contact-card" id="c-card"></div>
+  <div>
+    <h2>Écrire à la Ligue</h2>
+    <p style="color:var(--muted)">Une question sur une compétition, une licence, un projet dans votre club ? Laissez-nous un message, l'équipe vous répond rapidement.</p>
+    <form class="form" id="c-form" novalidate>
+      <div class="row">
+        <div class="field"><label for="c-name">Nom et prénom</label><input id="c-name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div class="field"><label for="c-subject">Sujet</label><select id="c-subject" name="subject"><option>Question générale</option><option>Compétitions</option><option>Jeunes / écoles de golf</option><option>Golf entreprise</option><option>Golf Pour Tous / Golf Tour</option><option>Partenariat</option></select></div>
+      <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" rows="7" required maxlength="4000"></textarea></div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div><button class="btn btn-sky" type="submit">Envoyer le message</button></div>
+      <div id="c-feedback" aria-live="polite"></div>
+    </form>
+  </div>
+</div></section>
+<section style="height:420px" id="c-map" aria-label="Plan d'accès"></section>
+</main>
+<footer id="site-footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

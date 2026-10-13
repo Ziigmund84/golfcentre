@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ligue Centre-Val de Loire de Golf</title>
+<meta name="description" content="Compétitions, écoles de golf, golf santé, golf entreprise : la Ligue Centre-Val de Loire de Golf fait vivre le golf dans les six départements de la région.">
+<meta name="theme-color" content="#003362">
+<meta property="og:title" content="Ligue Centre-Val de Loire de Golf">
+<meta property="og:description" content="Le golf se joue en Centre-Val de Loire : compétitions, jeunes, golf pour tous.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+
+<main id="main">
+  <!-- Ouverture : la trajectoire d'une balle, du départ au drapeau -->
+  <section class="hero" id="hero" aria-label="Présentation">
+    <div class="hero-sticky">
+      <div class="hero-photo" id="hero-photo"></div>
+      <svg class="hero-scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path class="hills" d="M0 760 C 220 700, 420 730, 640 712 S 1060 690, 1440 735 L1440 900 L0 900 Z"/>
+        <path class="loire" d="M-40 860 C 260 820, 480 880, 760 846 S 1200 800, 1500 850"/>
+        <ellipse class="green" cx="1190" cy="772" rx="150" ry="26"/>
+        <ellipse class="green-hi" cx="1190" cy="768" rx="118" ry="17"/>
+        <ellipse class="hole" cx="1214" cy="769" rx="9" ry="3"/>
+        <line class="pin" x1="1214" y1="769" x2="1214" y2="652"/>
+        <path class="flag" id="hero-flag" d="M1214 652 L1268 668 L1214 686 Z"/>
+        <rect class="tee" x="214" y="764" width="22" height="5" rx="2"/>
+        <path class="trail-ghost" d="M225 760 C 470 40, 1000 60, 1206 764"/>
+        <path class="trail" id="hero-trail" d="M225 760 C 470 40, 1000 60, 1206 764"/>
+        <circle class="ball" id="hero-ball" cx="225" cy="758" r="9"/>
+      </svg>
+      <div class="hero-content">
+        <div class="wrap">
+          <h1 class="hero-title" id="hero-title">Le golf se joue en Centre-Val de Loire</h1>
+          <p class="hero-text" id="hero-text">Compétitions, écoles de golf, golf santé, golf entreprise : la Ligue fait vivre le golf dans les six départements de la région, pour les champions comme pour les curieux.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-gold" href="competitions.html">Voir le calendrier</a>
+            <a class="btn btn-ghost on-dark" href="golfs.html">Trouver un golf</a>
+          </div>
+        </div>
+      </div>
+      <dl class="readout" aria-label="Trajectoire">
+        <dt>Portée</dt><dd><span id="ro-carry">0</span><small>m</small></dd>
+        <dt>Apex</dt><dd><span id="ro-apex">0</span><small>m</small></dd>
+        <dt>Vitesse balle</dt><dd><span id="ro-speed">0</span><small>km/h</small></dd>
+      </dl>
+      <div class="scroll-hint" aria-hidden="true"><i></i>Faites défiler pour jouer le coup</div>
+    </div>
+  </section>
+
+  <!-- Leaderboard : prochaines épreuves -->
+  <section class="section navy" aria-labelledby="t-board">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 id="t-board" data-split>Prochains départs</h2>
+          <p>Les épreuves à venir dans la Ligue et au-delà, mises à jour par l'équipe sportive.</p>
+        </div>
+        <a class="btn btn-sky" href="competitions.html">Tout le calendrier</a>
+      </div>
+      <div class="board" id="home-board">
+        <div class="board-head" aria-hidden="true"><span>Date</span><span>Épreuve</span><span>Parcours</span><span>Catégorie</span><span>Statut</span></div>
+        <div id="board-rows"><div class="board-empty">Chargement du calendrier…</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À la une -->
+  <section class="section" aria-labelledby="t-news">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 id="t-news" data-split>À la une</h2><p>Résultats, sélections, vie des clubs : ce qui s'est passé cette semaine.</p></div>
+        <a class="btn btn-line" href="actualites.html">Toute l'actualité</a>
+      </div>
+      <div class="news-grid" id="home-news" data-stagger></div>
+    </div>
+  </section>
+
+  <!-- Chemins de jeu -->
+  <section class="section white" aria-labelledby="t-paths">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2 id="t-paths" data-split>Quatre façons de jouer</h2><p>Du premier swing au championnat de France, il y a une place pour chacun dans la Ligue.</p></div>
+      </div>
+      <div class="paths" id="home-paths" data-stagger></div>
+    </div>
+  </section>
+
+  <!-- Golfs de la région -->
+  <section class="section navy" aria-labelledby="t-golfs">
+    <div class="wrap map-teaser">
+      <div>
+        <div class="big-num" data-count="100" id="golf-count">0</div>
+        <h2 id="t-golfs">golfs, practices et AS à portée de swing</h2>
+        <ul class="dept-list" id="dept-list"></ul>
+        <a class="btn btn-gold" href="golfs.html">Ouvrir l'annuaire</a>
+      </div>
+      <div class="mini-map" id="mini-map" aria-label="Carte des golfs de la région"></div>
+    </div>
+  </section>
+
+  <!-- Photothèque -->
+  <section class="section tight" aria-labelledby="t-photos">
+    <div class="wrap sec-head">
+      <div><h2 id="t-photos" data-split>Sur les fairways</h2><p>Stages, finales, Golf Tour : la saison en images.</p></div>
+      <a class="btn btn-line" href="galerie.html">Photothèque</a>
+    </div>
+    <div class="marquee"><div class="marquee-track" id="home-marquee"></div></div>
+  </section>
+
+  <!-- Licence -->
+  <section class="section tight">
+    <div class="wrap">
+      <div class="licence" data-reveal>
+        <svg class="dimples" viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="dp" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2.4" fill="#06213D"/></pattern></defs><circle cx="50" cy="50" r="50" fill="url(#dp)"/></svg>
+        <div>
+          <h2 id="lic-title">Pas encore licencié ?</h2>
+          <p id="lic-text">Création ou renouvellement : la licence ffgolf vous assure et vous ouvre les compétitions.</p>
+        </div>
+        <div class="btns">
+          <a class="btn btn-line" id="lic-why" href="https://www.ffgolf.org/Se-licencier/Les-du-golfeur-licencie/Pourquoi-prendre-votre-licence" target="_blank" rel="noopener">Pourquoi la licence</a>
+          <a class="btn" id="lic-url" href="https://www.ffgolf.org/Se-licencier/Je-commande" target="_blank" rel="noopener">Commander ma licence</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partenaires -->
+  <section class="section tight" aria-labelledby="t-partners" style="padding-bottom:160px">
+    <div class="wrap">
+      <h2 id="t-partners" class="sr-only">Nos partenaires</h2>
+      <div class="partners" id="home-partners"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

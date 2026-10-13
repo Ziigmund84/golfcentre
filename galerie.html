@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photothèque — Ligue Centre-Val de Loire de Golf</title>
+<meta name="description" content="Les albums photo de la Ligue Centre-Val de Loire de Golf.">
+<meta name="theme-color" content="#003362">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="galerie">
+<a class="skip" href="#main">Aller au contenu</a>
+<header id="site-header"></header>
+<main id="main">
+<section id="page-hero"></section>
+<section class="section" style="padding-top:48px"><div class="wrap">
+  <div class="chips" id="alb-cats" role="group" aria-label="Filtrer les albums" style="margin-bottom:28px"></div>
+  <div class="albums" id="albums"></div>
+</div></section>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lb-title"><div class="lb-top"><h2 id="lb-title"></h2><button class="lb-close" id="lb-close" aria-label="Fermer l'album">×</button></div><div class="lb-grid" id="lb-grid"></div></div>
+</main>
+<footer id="site-footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/components.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

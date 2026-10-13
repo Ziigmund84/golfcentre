@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Administration — Ligue Centre-Val de Loire de Golf</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div id="app">
+  <section class="login" id="login" hidden>
+    <div class="login-card">
+      <img src="https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/logo.png" alt="ffgolf — Ligue du Centre-Val de Loire" width="200">
+      <h1>Espace administration</h1>
+      <form id="login-form">
+        <label for="l-email">E-mail</label>
+        <input id="l-email" type="email" autocomplete="username" required>
+        <label for="l-pass">Mot de passe</label>
+        <input id="l-pass" type="password" autocomplete="current-password" required>
+        <button class="a-btn primary" type="submit">Se connecter</button>
+        <button class="a-link" type="button" id="forgot">Mot de passe oublié ?</button>
+        <p class="a-msg" id="login-msg" aria-live="polite"></p>
+      </form>
+      <form id="reset-form" hidden>
+        <p>Choisissez votre nouveau mot de passe.</p>
+        <label for="r-pass">Nouveau mot de passe</label>
+        <input id="r-pass" type="password" autocomplete="new-password" minlength="8" required>
+        <button class="a-btn primary" type="submit">Enregistrer le mot de passe</button>
+        <p class="a-msg" id="reset-msg" aria-live="polite"></p>
+      </form>
+      <a href="../index.html" class="a-link">← Retour au site</a>
+    </div>
+  </section>
+
+  <section class="shell" id="shell" hidden>
+    <aside class="side">
+      <a href="../index.html" class="side-brand" target="_blank" rel="noopener"><img src="https://kdcflcvufukagdjycwww.supabase.co/storage/v1/object/public/golfcentre-media/import/logo-light.png" alt="Voir le site" width="160"></a>
+      <nav id="side-nav" aria-label="Rubriques"></nav>
+      <div class="side-foot"><span id="who"></span><button class="a-link light" id="logout" type="button">Se déconnecter</button></div>
+    </aside>
+    <main class="main" id="main" tabindex="-1"></main>
+  </section>
+</div>
+
+<div class="drawer-bg" id="drawer-bg" hidden></div>
+<aside class="editor" id="editor" hidden aria-labelledby="ed-title" role="dialog" aria-modal="true">
+  <header class="ed-head"><h2 id="ed-title"></h2><button class="a-icon" id="ed-close" aria-label="Fermer">×</button></header>
+  <form id="ed-form" class="ed-body"></form>
+  <footer class="ed-foot">
+    <button class="a-btn danger" type="button" id="ed-delete">Supprimer</button>
+    <span class="grow"></span>
+    <button class="a-btn" type="button" id="ed-cancel">Annuler</button>
+    <button class="a-btn primary" type="submit" form="ed-form" id="ed-save">Enregistrer</button>
+  </footer>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
